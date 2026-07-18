@@ -1,11 +1,11 @@
 const API_URL = "https://www.easyscholar.cc/open/getPublicationRank";
-const CACHE_PREFIX = "journal-cache:";
+const CACHE_PREFIX = "journallens-cache:";
 const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 const pendingQueries = new Map();
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
-  if (message?.type !== "EASYSCHOLAR_QUERY") return false;
+  if (message?.type !== "JOURNALLENS_QUERY") return false;
 
   queryPublication(message.publicationName)
     .then((data) => sendResponse({ ok: true, data }))

@@ -1,6 +1,6 @@
-# easyScholar API Journal Metrics
+# JournalLens（期刊透镜）
 
-这是基于 easyScholar 多站点识别思路重写的精简版 Chrome/Edge 扩展。扩展从论文页面识别期刊名称，调用 easyScholar 开放接口，并在页面上显示影响因子和分区标签。
+JournalLens 是一款精简的 Chrome/Edge 学术浏览器扩展。它从论文页面识别期刊名称，调用 easyScholar 开放接口，并在页面上显示影响因子和分区标签。
 
 ## 已适配站点
 
@@ -25,7 +25,7 @@
 
 1. 在 Chrome 打开 `chrome://extensions/`，或在 Edge 打开 `edge://extensions/`。
 2. 开启“开发者模式”。
-3. 点击“加载已解压的扩展程序”，选择本目录 `api-extension`。
+3. 点击“加载已解压的扩展程序”，选择本目录 `JournalLens`。
 4. 点击扩展图标，填写 easyScholar “开放接口”中的密钥并保存。
 5. 刷新论文检索页面。
 

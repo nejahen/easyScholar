@@ -66,7 +66,7 @@ vm.runInNewContext(source, { chrome, fetch, URL, Map, Date, Promise, String, Obj
 function query(name) {
   return new Promise((resolve) => {
     const keepChannelOpen = messageListener(
-      { type: "EASYSCHOLAR_QUERY", publicationName: name },
+      { type: "JOURNALLENS_QUERY", publicationName: name },
       {},
       resolve,
     );

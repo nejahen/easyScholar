@@ -40,7 +40,7 @@
     processedAnchors.add(anchor);
 
     const container = document.createElement("span");
-    container.className = "easy-scholar-api-badges";
+    container.className = "journallens-badges";
     container.dataset.publication = name;
     container.append(statusBadge("查询中…"));
     anchor.insertAdjacentElement("afterend", container);
@@ -57,7 +57,7 @@
         key,
         new Promise((resolve, reject) => {
           chrome.runtime.sendMessage(
-            { type: "EASYSCHOLAR_QUERY", publicationName: name },
+            { type: "JOURNALLENS_QUERY", publicationName: name },
             (response) => {
               if (chrome.runtime.lastError) return reject(chrome.runtime.lastError);
               if (!response?.ok) return reject(new Error(response?.error || "查询失败"));
@@ -107,7 +107,7 @@
 
   function metricBadge(label, value, kind) {
     const badge = document.createElement("span");
-    badge.className = "easy-scholar-api-badge";
+    badge.className = "journallens-badge";
     badge.dataset.kind = kind;
     badge.textContent = `${label} ${formatMetric(value)}`;
     return badge;
@@ -115,7 +115,7 @@
 
   function statusBadge(text) {
     const badge = document.createElement("span");
-    badge.className = "easy-scholar-api-status";
+    badge.className = "journallens-status";
     badge.textContent = text;
     return badge;
   }

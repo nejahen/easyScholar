@@ -1,12 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "easyScholar API Journal Metrics",
+  "name": "JournalLens（期刊透镜）",
   "version": "0.1.0",
-  "description": "Detect journals on academic websites and display metrics returned by the easyScholar API.",
+  "description": "在学术网站识别期刊，并通过 easyScholar API 显示影响因子和期刊分区。",
   "permissions": ["storage"],
   "host_permissions": ["https://www.easyscholar.cc/*"],
   "action": {
-    "default_title": "easyScholar API",
+    "default_title": "JournalLens（期刊透镜）",
     "default_popup": "popup.html"
   },
   "background": {
