@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Detect journals on academic websites and display metrics returned by the easyScholar API.",
   "permissions": ["storage"],
-  "host_permissions": ["https://easyscholar.cc/*"],
+  "host_permissions": ["https://www.easyscholar.cc/*"],
   "action": {
     "default_title": "easyScholar API",
     "default_popup": "popup.html"

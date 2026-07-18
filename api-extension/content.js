@@ -72,7 +72,7 @@
 
   async function renderMetrics(container, result) {
     const { enabledMetrics } = await chrome.storage.local.get({
-      enabledMetrics: ["sciif", "sciif5", "jcr", "sciUp", "sciBase"],
+      enabledMetrics: ["sciif", "sciif5", "jcr", "sciUp", "sciBase", "customRank"],
     });
     const all = result.official || {};
     const specs = [
@@ -88,6 +88,11 @@
     const badges = specs
       .filter(([key, _label, value]) => selected.has(key) && hasMetric(value))
       .map(([_key, label, value, kind]) => metricBadge(label, value, kind));
+    if (selected.has("customRank")) {
+      (result.custom || []).forEach((item) => {
+        badges.push(metricBadge(item.abbName, item.rank, "custom"));
+      });
+    }
 
     container.replaceChildren(...(badges.length ? badges : [statusBadge("暂无指标")]));
     container.title = result.publicationName || container.dataset.publication;

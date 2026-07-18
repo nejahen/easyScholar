@@ -1,4 +1,4 @@
-const DEFAULT_METRICS = ["sciif", "sciif5", "jcr", "sciUp", "sciBase"];
+const DEFAULT_METRICS = ["sciif", "sciif5", "jcr", "sciUp", "sciBase", "customRank"];
 
 document.addEventListener("DOMContentLoaded", restoreSettings);
 document.querySelector("#save").addEventListener("click", saveSettings);

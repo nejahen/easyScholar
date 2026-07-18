@@ -31,16 +31,29 @@ const chrome = {
 async function fetch(url) {
   fetchCount += 1;
   const parsed = new URL(String(url));
-  assert.equal(parsed.origin + parsed.pathname, "https://easyscholar.cc/open/getPublicationRank");
+  assert.equal(parsed.origin + parsed.pathname, "https://www.easyscholar.cc/open/getPublicationRank");
   assert.equal(parsed.searchParams.get("secretKey"), "TEST_KEY");
   assert.equal(parsed.searchParams.get("publicationName"), "Nature");
   return {
     ok: true,
     async json() {
       return {
+        code: 200,
+        msg: "SUCCESS",
         data: {
           officialRank: { all: { sciif: "50.5", sci: "Q1", sciUp: "1区" } },
-          customRank: { rankInfo: [] },
+          customRank: {
+            rankInfo: [
+              {
+                uuid: "1614986460329492480",
+                abbName: "DUFE",
+                oneRankText: "TOP",
+                twoRankText: "A",
+                threeRankText: "B",
+              },
+            ],
+            rank: ["1614986460329492480&&&3"],
+          },
         },
       };
     },
@@ -65,6 +78,12 @@ function query(name) {
   const first = await query(" Nature ");
   assert.equal(first.ok, true);
   assert.equal(first.data.official.sciif, "50.5");
+  assert.deepEqual(JSON.parse(JSON.stringify(first.data.custom[0])), {
+    uuid: "1614986460329492480",
+    abbName: "DUFE",
+    level: 3,
+    rank: "B",
+  });
 
   const second = await query("Nature");
   assert.equal(second.ok, true);

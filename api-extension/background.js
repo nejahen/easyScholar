@@ -1,4 +1,4 @@
-const API_URL = "https://easyscholar.cc/open/getPublicationRank";
+const API_URL = "https://www.easyscholar.cc/open/getPublicationRank";
 const CACHE_PREFIX = "journal-cache:";
 const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -50,15 +50,40 @@ async function fetchPublication(secretKey, publicationName) {
   if (!response.ok) throw new Error(`easyScholar 请求失败（HTTP ${response.status}）`);
 
   const payload = await response.json();
-  if (!payload?.data) throw new Error(payload?.msg || "easyScholar 返回数据格式异常");
+  if (Number(payload?.code) !== 200 || !payload?.data) {
+    throw new Error(payload?.msg || "easyScholar 返回数据格式异常");
+  }
 
   const official = payload.data.officialRank?.all || {};
-  const custom = payload.data.customRank?.rankInfo || [];
+  const officialSelected = payload.data.officialRank?.select || {};
+  const custom = resolveCustomRanks(payload.data.customRank);
   if (!Object.keys(official).length && !custom.length) {
     throw new Error(payload.msg || "easyScholar 中未找到该期刊");
   }
 
-  return { publicationName, official, custom };
+  return { publicationName, official, officialSelected, custom };
+}
+
+function resolveCustomRanks(customRank) {
+  const rankInfo = Array.isArray(customRank?.rankInfo) ? customRank.rankInfo : [];
+  const ranks = Array.isArray(customRank?.rank) ? customRank.rank : [];
+  const infoByUuid = new Map(rankInfo.map((info) => [String(info.uuid), info]));
+  const levelFields = {
+    1: "oneRankText",
+    2: "twoRankText",
+    3: "threeRankText",
+    4: "fourRankText",
+    5: "fiveRankText",
+  };
+
+  return ranks.flatMap((entry) => {
+    const [uuid, rawLevel] = String(entry).split("&&&");
+    const level = Number(rawLevel);
+    const info = infoByUuid.get(uuid);
+    const rank = info?.[levelFields[level]];
+    if (!info || !rank) return [];
+    return [{ uuid, abbName: info.abbName || uuid, level, rank }];
+  });
 }
 
 function normalizePublicationName(value) {

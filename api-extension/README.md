@@ -32,5 +32,6 @@
 ## 数据和隐私
 
 - 密钥保存在浏览器本地 `chrome.storage.local` 中，不写入源码。
-- 只向 `https://easyscholar.cc/open/getPublicationRank` 发送识别出的期刊名称和接口密钥。
+- 只向 `https://www.easyscholar.cc/open/getPublicationRank` 发送识别出的期刊名称和接口密钥。
 - 查询结果在本地缓存 7 天；同一页面上的相同期刊只查询一次。
+- 支持展示官方数据集，以及按照 `rankInfo.uuid` 和 `rank` 映射出的自定义数据集等级。

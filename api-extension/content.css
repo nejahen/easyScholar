@@ -30,6 +30,12 @@
   border-color: #a8dab5;
 }
 
+.easy-scholar-api-badge[data-kind="custom"] {
+  color: #6f2da8;
+  background: #f4e8ff;
+  border-color: #d8b4f8;
+}
+
 .easy-scholar-api-status {
   color: #777;
   font-weight: 400;
