@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>easyScholar API</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>easyScholar API</h1>
+      <p class="hint">只把页面识别出的期刊名称发送到 easyScholar。</p>
+
+      <label class="field">
+        <span>开放接口密钥</span>
+        <input id="secretKey" type="password" autocomplete="off" placeholder="请输入 secretKey" />
+      </label>
+
+      <fieldset>
+        <legend>显示指标</legend>
+        <label><input type="checkbox" name="metric" value="sciif" /> 影响因子</label>
+        <label><input type="checkbox" name="metric" value="sciif5" /> 5 年影响因子</label>
+        <label><input type="checkbox" name="metric" value="jcr" /> JCR 分区</label>
+        <label><input type="checkbox" name="metric" value="sciUp" /> 中科院升级版</label>
+        <label><input type="checkbox" name="metric" value="sciBase" /> 中科院基础版</label>
+        <label><input type="checkbox" name="metric" value="sciUpTop" /> 中科院 Top</label>
+        <label><input type="checkbox" name="metric" value="sciwarn" /> 中科院预警</label>
+      </fieldset>
+
+      <button id="save" type="button">保存设置</button>
+      <p id="status" role="status"></p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

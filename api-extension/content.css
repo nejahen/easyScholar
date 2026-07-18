@@ -1,0 +1,41 @@
+.easy-scholar-api-badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin: 3px 6px;
+  vertical-align: middle;
+  font: 600 12px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.easy-scholar-api-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  color: #0b57d0;
+  background: #e8f0fe;
+  border: 1px solid #b9d0fa;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.easy-scholar-api-badge[data-kind="if"] {
+  color: #a14200;
+  background: #fef7e0;
+  border-color: #f7d774;
+}
+
+.easy-scholar-api-badge[data-kind="cas"] {
+  color: #137333;
+  background: #e6f4ea;
+  border-color: #a8dab5;
+}
+
+.easy-scholar-api-status {
+  color: #777;
+  font-weight: 400;
+}
+
+.easy-scholar-api-status[data-error="true"] {
+  color: #b3261e;
+  cursor: help;
+}

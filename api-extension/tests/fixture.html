@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="citation_journal_title" content="Nature" />
+    <link rel="stylesheet" href="../content.css" />
+    <title>扩展本地测试页</title>
+  </head>
+  <body>
+    <main>
+      <h1>A test article</h1>
+    </main>
+    <script>
+      window.chrome = {
+        runtime: {
+          lastError: null,
+          sendMessage(message, callback) {
+            callback({
+              ok: true,
+              data: {
+                publicationName: message.publicationName,
+                official: {
+                  sciif: "50.5",
+                  sciif5: "55.0",
+                  sci: "Q1",
+                  sciUp: "1区",
+                  sciBase: "1区",
+                },
+              },
+            });
+          },
+        },
+        storage: {
+          local: {
+            async get(defaults) {
+              return defaults;
+            },
+          },
+        },
+      };
+    </script>
+    <script src="../content.js"></script>
+  </body>
+</html>

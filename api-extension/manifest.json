@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "easyScholar API Journal Metrics",
+  "version": "0.1.0",
+  "description": "Detect journals on academic websites and display metrics returned by the easyScholar API.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://easyscholar.cc/*"],
+  "action": {
+    "default_title": "easyScholar API",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://scholar.google.com/*",
+        "https://scholar.google.com.hk/*",
+        "https://*.webofscience.com/*",
+        "https://*.webofknowledge.com/*",
+        "https://*.cnki.net/*",
+        "https://pubmed.ncbi.nlm.nih.gov/*",
+        "https://ieeexplore.ieee.org/*",
+        "https://link.springer.com/*",
+        "https://dl.acm.org/*",
+        "https://dblp.org/*",
+        "https://dblp.uni-trier.de/*",
+        "https://xueshu.baidu.com/*",
+        "https://www.aminer.cn/*",
+        "https://readpaper.com/*",
+        "https://www.sciencedirect.com/*",
+        "https://onlinelibrary.wiley.com/*",
+        "https://www.nature.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
