@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>JournalLens（期刊透镜）</title>
+    <link rel="stylesheet" href="content.css" />
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
@@ -26,6 +27,68 @@
         <label><input type="checkbox" name="metric" value="sciUpTop" /> 中科院 Top</label>
         <label><input type="checkbox" name="metric" value="sciwarn" /> 中科院预警</label>
         <label><input type="checkbox" name="metric" value="customRank" /> 自定义数据集</label>
+      </fieldset>
+
+      <fieldset class="sites-fieldset">
+        <legend>生效网站</legend>
+        <div class="mini-actions">
+          <button id="selectAllSites" type="button">全部启用</button>
+          <button id="clearAllSites" type="button">全部停用</button>
+        </div>
+        <label><input type="checkbox" name="site" value="googleScholar" /> Google Scholar</label>
+        <label><input type="checkbox" name="site" value="webOfScience" /> Web of Science</label>
+        <label><input type="checkbox" name="site" value="cnki" /> 中国知网</label>
+        <label><input type="checkbox" name="site" value="pubmed" /> PubMed</label>
+        <label><input type="checkbox" name="site" value="ieee" /> IEEE Xplore</label>
+        <label><input type="checkbox" name="site" value="springer" /> SpringerLink</label>
+        <label><input type="checkbox" name="site" value="acm" /> ACM DL</label>
+        <label><input type="checkbox" name="site" value="dblp" /> DBLP</label>
+        <label><input type="checkbox" name="site" value="baiduScholar" /> 百度学术</label>
+        <label><input type="checkbox" name="site" value="aminer" /> AMiner</label>
+        <label><input type="checkbox" name="site" value="readpaper" /> ReadPaper</label>
+        <label><input type="checkbox" name="site" value="scienceDirect" /> ScienceDirect</label>
+        <label><input type="checkbox" name="site" value="wiley" /> Wiley</label>
+        <label><input type="checkbox" name="site" value="nature" /> Nature</label>
+        <label class="wide"><input id="metadataFallback" type="checkbox" /> 使用页面期刊元数据辅助识别</label>
+      </fieldset>
+
+      <fieldset class="appearance-fieldset">
+        <legend>显示样式</legend>
+        <label class="wide control-row">
+          <span>主题</span>
+          <select id="stylePreset">
+            <option value="colorful">分类彩色</option>
+            <option value="classic">经典蓝色</option>
+            <option value="soft">柔和胶囊</option>
+            <option value="dark">深色标签</option>
+            <option value="outline">透明描边</option>
+            <option value="custom">自定义配色</option>
+          </select>
+        </label>
+        <label class="wide control-row">
+          <span>底纹</span>
+          <select id="pattern">
+            <option value="none">纯色</option>
+            <option value="stripes">斜纹</option>
+            <option value="dots">圆点</option>
+            <option value="gradient">渐变高光</option>
+          </select>
+        </label>
+        <label class="color-control"><span>文字</span><input id="customTextColor" type="color" /></label>
+        <label class="color-control"><span>背景</span><input id="customBackgroundColor" type="color" /></label>
+        <label class="color-control"><span>边框</span><input id="customBorderColor" type="color" /></label>
+        <label class="wide control-row">
+          <span>圆角 <output id="radiusValue">4px</output></span>
+          <input id="borderRadius" type="range" min="0" max="16" step="1" />
+        </label>
+        <div class="wide preview-wrap">
+          <span>预览</span>
+          <span id="stylePreview" class="journallens-badges">
+            <span class="journallens-badge" data-kind="if">IF 12.6</span>
+            <span class="journallens-badge" data-kind="cas">中科院 1区</span>
+            <span class="journallens-badge" data-kind="custom">DUFE B</span>
+          </span>
+        </div>
       </fieldset>
 
       <button id="save" type="button">保存设置</button>

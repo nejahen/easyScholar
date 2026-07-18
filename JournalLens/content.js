@@ -3,23 +3,40 @@
 
   const processedAnchors = new WeakSet();
   const journalRequests = new Map();
+  const DEFAULT_SITE_KEYS = [
+    "googleScholar", "webOfScience", "cnki", "pubmed", "ieee", "springer", "acm",
+    "dblp", "baiduScholar", "aminer", "readpaper", "scienceDirect", "wiley", "nature",
+  ];
+  const DEFAULT_DISPLAY_STYLE = {
+    stylePreset: "colorful",
+    pattern: "none",
+    customTextColor: "#ffffff",
+    customBackgroundColor: "#0b57d0",
+    customBorderColor: "#0842a0",
+    borderRadius: 4,
+  };
+  let runtimeSettings = {
+    enabledSites: DEFAULT_SITE_KEYS,
+    metadataFallback: true,
+    ...DEFAULT_DISPLAY_STYLE,
+  };
   let scanTimer = 0;
 
   const adapters = [
-    { test: /(^|\.)scholar\.google\./, scan: scanGoogleScholar },
-    { test: /webofscience|webofknowledge/, scan: scanWebOfScience },
-    { test: /(^|\.)cnki\.net$/, scan: scanCnki },
-    { test: /^pubmed\.ncbi\.nlm\.nih\.gov$/, scan: scanPubMed },
-    { test: /^ieeexplore\.ieee\.org$/, scan: scanIEEE },
-    { test: /^link\.springer\.com$/, scan: scanSpringer },
-    { test: /^dl\.acm\.org$/, scan: scanAcm },
-    { test: /(^|\.)dblp(\.uni-trier)?\.de$|^dblp\.org$/, scan: scanDblp },
-    { test: /^xueshu\.baidu\.com$/, scan: scanBaiduScholar },
-    { test: /(^|\.)aminer\.cn$/, scan: scanAminer },
-    { test: /(^|\.)readpaper\.com$/, scan: scanReadPaper },
-    { test: /^www\.sciencedirect\.com$/, scan: scanScienceDirect },
-    { test: /^onlinelibrary\.wiley\.com$/, scan: scanWiley },
-    { test: /^www\.nature\.com$/, scan: scanNature },
+    { key: "googleScholar", test: /(^|\.)scholar\.google\./, scan: scanGoogleScholar },
+    { key: "webOfScience", test: /webofscience|webofknowledge/, scan: scanWebOfScience },
+    { key: "cnki", test: /(^|\.)cnki\.net$/, scan: scanCnki },
+    { key: "pubmed", test: /^pubmed\.ncbi\.nlm\.nih\.gov$/, scan: scanPubMed },
+    { key: "ieee", test: /^ieeexplore\.ieee\.org$/, scan: scanIEEE },
+    { key: "springer", test: /^link\.springer\.com$/, scan: scanSpringer },
+    { key: "acm", test: /^dl\.acm\.org$/, scan: scanAcm },
+    { key: "dblp", test: /(^|\.)dblp(\.uni-trier)?\.de$|^dblp\.org$/, scan: scanDblp },
+    { key: "baiduScholar", test: /^xueshu\.baidu\.com$/, scan: scanBaiduScholar },
+    { key: "aminer", test: /(^|\.)aminer\.cn$/, scan: scanAminer },
+    { key: "readpaper", test: /(^|\.)readpaper\.com$/, scan: scanReadPaper },
+    { key: "scienceDirect", test: /^www\.sciencedirect\.com$/, scan: scanScienceDirect },
+    { key: "wiley", test: /^onlinelibrary\.wiley\.com$/, scan: scanWiley },
+    { key: "nature", test: /^www\.nature\.com$/, scan: scanNature },
   ];
 
   function scheduleScan() {
@@ -30,8 +47,13 @@
   function scanPage() {
     const host = location.hostname.toLowerCase();
     const adapter = adapters.find((candidate) => candidate.test.test(host));
-    if (adapter) adapter.scan();
-    scanCitationMetadata();
+    if (!adapter) {
+      if (runtimeSettings.metadataFallback) scanCitationMetadata();
+      return;
+    }
+    if (!runtimeSettings.enabledSites.includes(adapter.key)) return;
+    adapter.scan();
+    if (runtimeSettings.metadataFallback) scanCitationMetadata();
   }
 
   function queueResult(anchor, publicationName) {
@@ -42,12 +64,22 @@
     const container = document.createElement("span");
     container.className = "journallens-badges";
     container.dataset.publication = name;
+    applyDisplayStyle(container);
     container.append(statusBadge("查询中…"));
     anchor.insertAdjacentElement("afterend", container);
 
     queryJournal(name)
       .then((result) => renderMetrics(container, result))
       .catch((error) => renderError(container, error));
+  }
+
+  function applyDisplayStyle(container) {
+    container.dataset.theme = runtimeSettings.stylePreset;
+    container.dataset.pattern = runtimeSettings.pattern;
+    container.style.setProperty("--journallens-custom-text", runtimeSettings.customTextColor);
+    container.style.setProperty("--journallens-custom-bg", runtimeSettings.customBackgroundColor);
+    container.style.setProperty("--journallens-custom-border", runtimeSettings.customBorderColor);
+    container.style.setProperty("--journallens-radius", `${runtimeSettings.borderRadius}px`);
   }
 
   function queryJournal(name) {
@@ -251,7 +283,16 @@
     if (journal && anchor) queueResult(anchor, journal);
   }
 
-  const observer = new MutationObserver(scheduleScan);
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-  scanPage();
+  async function initialize() {
+    runtimeSettings = await chrome.storage.local.get({
+      enabledSites: DEFAULT_SITE_KEYS,
+      metadataFallback: true,
+      ...DEFAULT_DISPLAY_STYLE,
+    });
+    const observer = new MutationObserver(scheduleScan);
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    scanPage();
+  }
+
+  initialize();
 })();

@@ -34,7 +34,12 @@
         storage: {
           local: {
             async get(defaults) {
-              return defaults;
+              return {
+                ...defaults,
+                stylePreset: "dark",
+                pattern: "dots",
+                borderRadius: 12,
+              };
             },
           },
         },

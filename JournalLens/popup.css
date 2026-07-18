@@ -4,10 +4,12 @@
 }
 
 body {
-  width: 330px;
+  width: 430px;
+  max-height: 590px;
   margin: 0;
   color: #202124;
   background: #fff;
+  overflow-y: auto;
 }
 
 main { padding: 16px; }
@@ -34,6 +36,65 @@ fieldset {
 }
 
 fieldset label { white-space: nowrap; }
+.wide { grid-column: 1 / -1; }
+.sites-fieldset, .appearance-fieldset { grid-template-columns: 1fr 1fr; }
+
+.mini-actions {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: 8px;
+}
+
+.mini-actions button {
+  padding: 5px 8px;
+  color: #0b57d0;
+  background: #eef3fc;
+  border: 1px solid #c5d4ee;
+}
+
+.control-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.control-row select, .control-row input[type="range"] {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.control-row select {
+  padding: 6px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.color-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.color-control input {
+  width: 42px;
+  height: 28px;
+  padding: 1px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+
+.preview-wrap {
+  padding: 8px;
+  background: #f7f8fa;
+  border: 1px dashed #c8cdd4;
+  border-radius: 6px;
+}
+
+.preview-wrap > span:first-child { font-weight: 600; }
+.preview-wrap .journallens-badges { display: flex; margin: 7px 0 0; }
 button {
   width: 100%;
   padding: 8px;
