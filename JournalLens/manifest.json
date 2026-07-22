@@ -1,13 +1,25 @@
 {
   "manifest_version": 3,
   "name": "JournalLens（期刊透镜）",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "在学术网站识别期刊，并通过 easyScholar API 显示影响因子和期刊分区。",
   "permissions": ["storage"],
   "host_permissions": ["https://www.easyscholar.cc/*"],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
   "action": {
     "default_title": "JournalLens（期刊透镜）",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
   },
   "background": {
     "service_worker": "background.js"
