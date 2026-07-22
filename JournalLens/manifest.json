@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "JournalLens（期刊透镜）",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "在学术网站识别期刊，并通过 easyScholar API 显示影响因子和期刊分区。",
   "permissions": ["storage"],
   "host_permissions": ["https://www.easyscholar.cc/*"],

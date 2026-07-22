@@ -51,6 +51,38 @@
   box-shadow: 0 1px 3px rgb(15 23 42 / 10%);
 }
 
+.journallens-badges[data-theme="ios"] {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+}
+
+.journallens-badges[data-theme="ios"] .journallens-badge {
+  padding: 2px 8px;
+  color: #007aff;
+  background-color: rgb(0 122 255 / 12%);
+  border-color: rgb(255 255 255 / 72%);
+  border-radius: 999px;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 8%),
+    inset 0 1px 0 rgb(255 255 255 / 55%);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+}
+
+.journallens-badges[data-theme="ios"] .journallens-badge[data-kind="if"] {
+  color: #c93400;
+  background-color: rgb(255 149 0 / 14%);
+}
+
+.journallens-badges[data-theme="ios"] .journallens-badge[data-kind="cas"] {
+  color: #248a3d;
+  background-color: rgb(52 199 89 / 14%);
+}
+
+.journallens-badges[data-theme="ios"] .journallens-badge[data-kind="custom"] {
+  color: #8944ab;
+  background-color: rgb(175 82 222 / 14%);
+}
+
 .journallens-badges[data-theme="dark"] .journallens-badge {
   color: #f8fafc;
   background-color: #273449;
