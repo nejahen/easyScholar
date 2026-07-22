@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="citation_journal_title" content="Nature" />
-    <link rel="stylesheet" href="../content.css" />
+    <link rel="stylesheet" href="../content.css?v=0.2.2" />
     <title>JournalLens 本地测试页</title>
   </head>
   <body>
@@ -37,14 +37,18 @@
               return {
                 ...defaults,
                 stylePreset: "ios",
-                pattern: "none",
+                pattern: "gradient",
                 borderRadius: 16,
+                customTextColor: "#000000",
+                customBackgroundColor: "#aaaaaa",
+                customBorderColor: "#124ea0",
+                useCustomColors: true,
               };
             },
           },
         },
       };
     </script>
-    <script src="../content.js"></script>
+    <script src="../content.js?v=0.2.2"></script>
   </body>
 </html>

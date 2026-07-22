@@ -2,8 +2,8 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../content.css" />
-    <link rel="stylesheet" href="../popup.css" />
+    <link rel="stylesheet" href="../content.css?v=0.2.2" />
+    <link rel="stylesheet" href="../popup.css?v=0.2.2" />
     <title>JournalLens iOS 设置面板测试页</title>
   </head>
   <body data-ui-theme="ios">
@@ -14,7 +14,13 @@
         <legend>显示样式</legend>
         <div class="wide preview-wrap">
           <span>预览</span>
-          <span class="journallens-badges" data-theme="ios" data-pattern="none" style="--journallens-radius: 16px">
+          <span
+            class="journallens-badges"
+            data-theme="ios"
+            data-pattern="gradient"
+            data-custom-colors="true"
+            style="--journallens-radius: 16px; --journallens-custom-text: #000000; --journallens-custom-bg: #aaaaaa; --journallens-custom-border: #124ea0"
+          >
             <span class="journallens-badge" data-kind="if">IF 12.6</span>
             <span class="journallens-badge" data-kind="cas">中科院 1区</span>
             <span class="journallens-badge" data-kind="custom">DUFE B</span>

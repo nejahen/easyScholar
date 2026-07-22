@@ -24,6 +24,9 @@ const context = {
           return {
             ...defaults,
             borderRadius: 4,
+            customBackgroundColor: "#aaaaaa",
+            customBorderColor: "#124ea0",
+            customTextColor: "#000000",
             enabledMetrics: [],
             enabledSites: [],
             stylePreset: "ios",
@@ -54,13 +57,16 @@ vm.runInNewContext(fs.readFileSync(require.resolve("../popup.js"), "utf8"), cont
   assert.deepEqual(JSON.parse(JSON.stringify(savedSettings)), {
     borderRadius: 16,
     pattern: "none",
-    styleSchemaVersion: 2,
+    styleSchemaVersion: 3,
+    useCustomColors: true,
   });
+  assert.equal(field("#useCustomColors").checked, true);
 
   context.updatePreview();
   assert.equal(context.document.body.dataset.uiTheme, "ios");
+  assert.equal(field("#stylePreview").dataset.customColors, "true");
   assert.equal(field("#radiusValue").value, "16px");
-  console.log("popup iOS theme migration tests passed");
+  console.log("popup theme migration and custom color tests passed");
 })().catch((error) => {
   console.error(error);
   process.exitCode = 1;

@@ -13,6 +13,7 @@
     customTextColor: "#ffffff",
     customBackgroundColor: "#0b57d0",
     customBorderColor: "#0842a0",
+    useCustomColors: false,
     borderRadius: 4,
   };
   let runtimeSettings = {
@@ -76,6 +77,7 @@
   function applyDisplayStyle(container) {
     container.dataset.theme = runtimeSettings.stylePreset;
     container.dataset.pattern = runtimeSettings.pattern;
+    container.dataset.customColors = runtimeSettings.useCustomColors ? "true" : "false";
     container.style.setProperty("--journallens-custom-text", runtimeSettings.customTextColor);
     container.style.setProperty("--journallens-custom-bg", runtimeSettings.customBackgroundColor);
     container.style.setProperty("--journallens-custom-border", runtimeSettings.customBorderColor);
