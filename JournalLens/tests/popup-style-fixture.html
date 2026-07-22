@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../content.css" />
+    <link rel="stylesheet" href="../popup.css" />
+    <title>JournalLens iOS 设置面板测试页</title>
+  </head>
+  <body data-ui-theme="ios">
+    <main>
+      <h1>JournalLens（期刊透镜）</h1>
+      <p class="hint">iOS 玻璃拟态主题测试</p>
+      <fieldset class="appearance-fieldset">
+        <legend>显示样式</legend>
+        <div class="wide preview-wrap">
+          <span>预览</span>
+          <span class="journallens-badges" data-theme="ios" data-pattern="none" style="--journallens-radius: 16px">
+            <span class="journallens-badge" data-kind="if">IF 12.6</span>
+            <span class="journallens-badge" data-kind="cas">中科院 1区</span>
+            <span class="journallens-badge" data-kind="custom">DUFE B</span>
+          </span>
+        </div>
+      </fieldset>
+      <button id="save" type="button">保存设置</button>
+    </main>
+  </body>
+</html>
